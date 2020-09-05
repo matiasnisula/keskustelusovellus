@@ -1,1 +1,3 @@
-# keskustelusovellusTesti
+#keskustelusovellus
+
+Sivustolle voi kirjautua peruskäyttäjänä tai ylläpitätäjänä. Kirjautuminen vaatii käyttäjätunnuksen luomisen. Käyttäjä pystyy kirjoittamaan viestejä, hakemaan itseään kiinnostavia keskustelunaiheita hakutoiminnolla, sekä aloittaa uusia keeskusteluketjuja. Käyttäjän kirjoittaman viestit ovat kaikkien luettavissa. Käyttäjä pystyy poistamaan kirjoittamansa viestin tai muokata sitä. Ylläpitäjä pystyy poistamaan mitä tahansa viestejä. Käyttäjän on mahdollista ilmoittaa muiden viestejä, jos ne ovat esimerkiksi asiattomia. Kun viesti on saanut tietyn määrän ilmoituksia, se poistetaan. Ylläpitäjänä on aluksi sovelluksen tekijä, joka voi tarvittaessa antaa ylläpitäjänoikeuksia muille. 
