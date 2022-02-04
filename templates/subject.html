@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+Aiheeseen liittyvät viestiketjut:
+
+{% for thread in threads %}
+<br>
+{{ thread[1] }}
+<br>
+{% endfor %}
+<a href="/subject/{{ id }}/newthread">Lisää uusi viestiketju</a> 
+
