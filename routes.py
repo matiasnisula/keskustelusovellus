@@ -22,6 +22,13 @@ def send_subject():
     else:
         return render_template("error.html", message="Aiheen lisääminen ei onnistunut")
 
+@app.route("/subject/<int:subject_id>/<int:thread_id>", methods=["GET", "POST"])
+def get_messages(subject_id,thread_id):
+    message_list = messages.get_list(thread_id)
+    return render_template("messages.html", messages=message_list, title=message_list[0][0])
+
+
+
 @app.route("/subject/<int:id>/newthread", methods=["GET","POST"])
 def send_thread(id):
     if request.method == "GET":
