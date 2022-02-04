@@ -1,0 +1,21 @@
+<!DOCTYPE html>  
+Aiheet:
+<hr>
+{% for subject in subjects %}
+<a href="/subject/{{subject[0]}}"> {{ subject[1] }}</a>
+<p>
+<hr>
+{% endfor %}
+{% if session.user_id %}
+<br>
+<form action="/subject" method="post">
+Aihe: <br>
+<textarea name="subject" rows="1" cols="20"></textarea>
+<input type="submit" value="Lisää aihe">
+</form>
+<br>
+Olet kirjautunut sisään.
+<a href="/logout">Kirjaudu ulos</a>
+{% else %}
+<a href="/login">Kirjaudu sisään</a>
+{% endif %}
