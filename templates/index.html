@@ -1,9 +1,8 @@
 <!DOCTYPE html>  
-Aiheet:
-<hr>
+<h3>Aiheet:</h3>
+<br>
 {% for subject in subjects %}
 <a href="/subject/{{subject[0]}}"> {{ subject[1] }}</a>
-<p>
 <hr>
 {% endfor %}
 {% if session.user_id %}
