@@ -1,12 +1,9 @@
-from concurrent.futures import thread
-from threading import Thread
 from db import db
 import users
 
 
 def get_list(thread_id):
-    sql = "SELECT T.title, M.content, M.sent_at FROM threads T, messages M " \
-        "WHERE T.id=M.thread_id AND T.id=:id"
+    sql = "SELECT content, sent_at FROM messages WHERE thread_id=:id"
     result = db.session.execute(sql, {"id":thread_id})
     return result.fetchall()
 
