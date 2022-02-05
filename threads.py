@@ -1,4 +1,3 @@
-from sqlalchemy import true
 from db import db
 import users
 
@@ -11,6 +10,11 @@ def get_list(subject_id):
     sql ="SELECT * FROM threads WHERE subject_id=:id"
     result = db.session.execute(sql, {"id":subject_id})
     return result.fetchall()
+
+def get_title(thread_id):
+    sql = "SELECT title FROM threads WHERE id=:id"
+    result = db.session.execute(sql, {"id":thread_id})
+    return result.fetchone()
 
 #Palauttaa lisätyn keskusteluketjun id-numeron
 def save_new(title, subject_id):
