@@ -1,17 +1,18 @@
 from crypt import methods
 from app import app
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, url_for
 import messages, users, subjects, threads
 
 @app.route("/")
 def index():
-    list = subjects.get_list()
+    list = subjects.get_all()
     return render_template("index.html", subjects=list)
 
 @app.route("/subject/<int:id>", methods=["GET"])
 def subject(id):
     list = threads.get_list(id)
-    return render_template("subject.html", threads=list, id=id)
+    subject = subjects.get_title(id)[0]
+    return render_template("subject.html", threads=list, id=id, subject=subject)
 
 
 @app.route("/subject", methods=["POST"])
@@ -23,10 +24,18 @@ def send_subject():
         return render_template("error.html", message="Aiheen lisääminen ei onnistunut")
 
 @app.route("/subject/<int:subject_id>/<int:thread_id>", methods=["GET", "POST"])
-def get_messages(subject_id,thread_id):
-    message_list = messages.get_list(thread_id)
-    return render_template("messages.html", messages=message_list, title=message_list[0][0])
-
+def send_message(subject_id,thread_id):
+    if request.method == "GET":
+        message_list = messages.get_list(thread_id)
+        title = threads.get_title(thread_id)[0]
+        return render_template("messages.html", messages=message_list, title=title, 
+                            subject_id=subject_id, thread_id=thread_id)
+    if request.method == "POST":
+        content = request.form["content"]
+        if messages.save_new(content, thread_id):
+            return redirect("/subject/"+str(subject_id)+"/"+str(thread_id))
+        else:
+            return render_template("error.html", message="Viestin lähettäminen epäonnistui")
 
 
 @app.route("/subject/<int:id>/newthread", methods=["GET","POST"])
