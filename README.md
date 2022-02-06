@@ -22,3 +22,15 @@ Sovelluksen ominaisuuksia:
  - Käyttäjä voi etsiä aiheita ja viestejä, jotka sisältävät annetun sanan
 
  - Ylläpitäjä voi lisätä ja poistaa keskustelualueita
+
+
+Tällä hetkellä sovelluksessa on toiminnot:
+
+ - Uuden tunnuksen luomiselle sekä sisäänkirjautumiselle
+
+ - Sisäänkirjautunut käyttäjä voi lisätä uuden aihealueen
+
+ - Sisäänkirjautunut käyttäjä voi lisätä uuden keskusteluketjun, sekä lisätä viestejä olemassa olevaan ketjuun
+
+
+Sovellusta on mahdollista testata [Herokussa](https://serene-brook-58269.herokuapp.com/)
