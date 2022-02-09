@@ -45,12 +45,8 @@ def send_thread(id):
     if request.method == "GET":
         return render_template("newthread.html", id=id)
     if request.method == "POST":
-        title = request.form["title"]
-        thread_id = threads.save_new(title, id)
-        if thread_id != 0:
-            message_content = request.form["content"]
-            if messages.save_new(message_content, thread_id):
-                return redirect("/subject/"+str(id))
+        if threads.save_new(request.form["title"], id):
+            return redirect("/subject/"+str(id))
         else:
             return render_template("error.html", message="Viestiketjun lisääminen epäonnistui")
     
