@@ -1,12 +1,12 @@
 from db import db
 import users
 
-def get_list():
+def get_all_threads():
     sql = "SELECT * FROM threads"
     result = db.session.execute(sql)
     return result.fetchall()
 
-def get_list(subject_id):
+def get_threads_on(subject_id):
     sql ="SELECT * FROM threads WHERE subject_id=:id"
     result = db.session.execute(sql, {"id":subject_id})
     return result.fetchall()
