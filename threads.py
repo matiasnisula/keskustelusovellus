@@ -16,15 +16,13 @@ def get_title(thread_id):
     result = db.session.execute(sql, {"id":thread_id})
     return result.fetchone()
 
-#Palauttaa lisätyn keskusteluketjun id-numeron
 def save_new(title, subject_id):
     user_id = users.user_id()
     if user_id == 0:
-        return 0
+        return False
     sql = "INSERT INTO threads (title, subject_id, user_id) VALUES " \
-          "(:title, :subject_id, :user_id) RETURNING id"
-    result = db.session.execute(sql, {"title":title, "subject_id":subject_id, "user_id":user_id})
-    thread_id = result.fetchone()[0]
+          "(:title, :subject_id, :user_id)"
+    db.session.execute(sql, {"title":title, "subject_id":subject_id, "user_id":user_id})
     db.session.commit()
-    return thread_id
+    return True
     
