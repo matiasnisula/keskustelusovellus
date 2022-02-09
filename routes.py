@@ -10,7 +10,7 @@ def index():
 
 @app.route("/subject/<int:id>", methods=["GET"])
 def subject(id):
-    list = threads.get_list(id)
+    list = threads.get_threads_on(id)
     subject = subjects.get_title(id)[0]
     return render_template("subject.html", threads=list, id=id, subject=subject)
 
@@ -40,6 +40,8 @@ def send_message(subject_id,thread_id):
 
 @app.route("/subject/<int:id>/newthread", methods=["GET","POST"])
 def send_thread(id):
+    if users.user_id() == 0:
+        return render_template("error.html", message="Kirjaudu sisään lähettääksesi viesti")
     if request.method == "GET":
         return render_template("newthread.html", id=id)
     if request.method == "POST":
