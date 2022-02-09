@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+{% extends "layout.html" %}
+{% block title %}Aiheet - Viestit{% endblock %}
+{% block content %}
 <form action="/subject/{{ id }}/newthread" method="post">
 Uuden viestiketjun otsikko: <br>
 <textarea name="title" rows="1" cols="40"></textarea>
@@ -8,3 +11,4 @@ Viesti: <br>
 <br>
 <input type="submit" value="Lisää keskusteluketju">
 </form>
+{% endblock %}

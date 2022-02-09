@@ -1,10 +1,17 @@
 <!DOCTYPE html>  
+{% extends "layout.html" %}
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+{% block content %}
 <h3>Aiheet:</h3>
 <br>
+<ul>
 {% for subject in subjects %}
-<a href="/subject/{{subject[0]}}"> {{ subject[1] }}</a>
+<li><a href="/subject/{{subject[0]}}"> {{ subject[1] }}</a></li>
 <hr>
 {% endfor %}
+</ul>
 {% if session.user_id %}
 <br>
 <form action="/subject" method="post">
@@ -13,8 +20,5 @@ Aihe: <br>
 <input type="submit" value="Lisää aihe">
 </form>
 <br>
-Olet kirjautunut sisään.
-<a href="/logout">Kirjaudu ulos</a>
-{% else %}
-<a href="/login">Kirjaudu sisään</a>
 {% endif %}
+{% endblock %}

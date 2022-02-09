@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+{% extends "layout.html" %}
+{% block title %}Aiheet - Viestit{% endblock %}
+{% block content %}
 <h3>{{ title }}</h3>
 <hr>
 {% for message in messages %}
@@ -6,11 +9,14 @@
 <p>Lähetetty: {{ message[1] }}</p>
 <hr>
 {% endfor %}
+{% if session.user_id %}
 <form action="/subject/{{ subject_id }}/{{ thread_id }}" method="post">
 Lisää uusi viesti: <br>
 <textarea name="content" rows="3" cols="40"></textarea>
 <br>
 <input type="submit" value="Lisää viesti">
 </form>
+{% endif %}
 <br>
 <a href="/subject/{{ subject_id }}">Takaisin</a>
+{% endblock %}
