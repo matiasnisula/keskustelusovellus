@@ -16,7 +16,7 @@ def get_title(thread_id):
     result = db.session.execute(sql, {"id":thread_id})
     return result.fetchone()
 
-def save_new(title, subject_id):
+def save(title, subject_id):
     user_id = users.user_id()
     if user_id == 0:
         return False
