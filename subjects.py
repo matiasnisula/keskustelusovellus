@@ -23,5 +23,3 @@ def save(title:str):
     except:
         return False
     return True
-
-
