@@ -7,14 +7,16 @@ CREATE TABLE users (
 
 CREATE TABLE subjects (
     id SERIAL PRIMARY KEY,
-    title TEXT UNIQUE
+    title TEXT UNIQUE,
+    user_id INTEGER REFERENCES users
 );
 
 CREATE TABLE threads (
     id SERIAL PRIMARY KEY,
     title TEXT,
     subject_id INTEGER REFERENCES subjects,
-    user_id INTEGER REFERENCES users
+    user_id INTEGER REFERENCES users,
+    visible BOOLEAN
 );
 
 CREATE TABLE messages (
@@ -22,5 +24,6 @@ CREATE TABLE messages (
     content TEXT,
     user_id INTEGER REFERENCES users,
     thread_id INTEGER REFERENCES threads,
-    sent_at TIMESTAMP
+    sent_at TIMESTAMP,
+    visible BOOLEAN
 );
