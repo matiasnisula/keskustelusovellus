@@ -17,9 +17,11 @@ def save(title:str):
     if user_id == 0:
         return False
     try:
-        sql = "INSERT INTO subjects (title) VALUES (:title)"
-        db.session.execute(sql, {"title":title})
+        sql = "INSERT INTO subjects (title, user_id) VALUES (:title, :user_id)"
+        db.session.execute(sql, {"title":title, "user_id":user_id})
         db.session.commit()
     except:
         return False
     return True
+
+
