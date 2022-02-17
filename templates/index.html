@@ -9,13 +9,19 @@
 <ul>
 {% for subject in subjects %}
 <li><a href="/subject/{{subject[0]}}"> {{ subject[1] }}</a></li>
+{% if session.user_id %}
+<br>
+<a href="/delete/{{subject[0]}}"> Poista aihe</a>
+<br>
+{% endif %}
+
 <hr>
 {% endfor %}
 </ul>
 {% if session.user_id %}
 <br>
 <form action="/subject" method="post">
-Aihe: <br>
+Lisää uusi aihe: <br>
 <textarea name="subject" rows="1" cols="20"></textarea>
 <input type="submit" value="Lisää aihe">
 </form>
