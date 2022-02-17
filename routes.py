@@ -1,4 +1,5 @@
 from crypt import methods
+from email import message
 from app import app
 from flask import render_template, request, redirect, url_for
 import messages, users, subjects, threads
@@ -32,7 +33,7 @@ def send_message(subject_id,thread_id):
                             subject_id=subject_id, thread_id=thread_id)
     if request.method == "POST":
         content = request.form["content"]
-        if messages.save_new(content, thread_id):
+        if messages.save(content, thread_id):
             return redirect("/subject/"+str(subject_id)+"/"+str(thread_id))
         else:
             return render_template("error.html", message="Viestin lähettäminen epäonnistui")
@@ -45,7 +46,7 @@ def send_thread(id):
     if request.method == "GET":
         return render_template("newthread.html", id=id)
     if request.method == "POST":
-        if threads.save_new(request.form["title"], id):
+        if threads.save(request.form["title"], id):
             return redirect("/subject/"+str(id))
         else:
             return render_template("error.html", message="Viestiketjun lisääminen epäonnistui")
@@ -56,6 +57,14 @@ def delete_thread(subject_id, id):
         return redirect("/subject/"+str(subject_id))
     else:
         return render_template("error.html", message="Viestiketjun poistaminen epäonnistui")
+
+@app.route("/deletemessage/<int:subject_id>/<int:thread_id>/<int:message_id>")
+def delete_message(subject_id, thread_id, message_id):
+    if messages.delete(message_id):
+        url = f"/subject/{subject_id}/{thread_id}"
+        return redirect(url)
+    else:
+        return render_template("error.html", message="Viestin poisto epäonnistui")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -69,10 +78,12 @@ def login():
         else:
             return render_template("error.html", message="Väärä tunnus tai salasana")
 
+
 @app.route("/logout")
 def logout():
     users.logout()
     return redirect("/")
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
