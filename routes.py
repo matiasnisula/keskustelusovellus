@@ -49,7 +49,13 @@ def send_thread(id):
             return redirect("/subject/"+str(id))
         else:
             return render_template("error.html", message="Viestiketjun lisääminen epäonnistui")
-    
+
+@app.route("/delete/<int:subject_id>/<int:id>", methods=["GET"])
+def delete_thread(subject_id, id):
+    if threads.delete(id):
+        return redirect("/subject/"+str(subject_id))
+    else:
+        return render_template("error.html", message="Viestiketjun poistaminen epäonnistui")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
