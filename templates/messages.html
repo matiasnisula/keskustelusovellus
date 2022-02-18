@@ -20,6 +20,7 @@ Lisää uusi viesti: <br>
 <input type="submit" value="Lisää viesti">
 </form>
 {% endif %}
+<p>{{ error_message }}</p>
 <br>
 <a href="/subject/{{ subject_id }}">Takaisin</a>
 {% endblock %}
