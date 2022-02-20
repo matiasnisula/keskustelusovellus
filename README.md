@@ -32,5 +32,9 @@ Tällä hetkellä sovelluksessa on toiminnot:
 
  - Sisäänkirjautunut käyttäjä voi lisätä uuden keskusteluketjun, sekä lisätä viestejä olemassa olevaan ketjuun
 
+ - Sisäänkirjautunut käyttäjä voi poistaa lisäämänsä keskusteluketjun
+
+ - Sisäänkirjautunut käyttäjä voi poistaa kirjoittamansa viestin mihin tahansa ketjuun
+
 
 Sovellusta on mahdollista testata [Herokussa](https://serene-brook-58269.herokuapp.com/)
