@@ -96,7 +96,7 @@ def login():
         if users.login(username, password):
             return redirect("/")
         else:
-            return render_template("error.html", message="Väärä tunnus tai salasana")
+            return render_template("login.html", error_message="Virhe: väärä tunnus tai salasana")
 
 
 @app.route("/logout")
@@ -110,12 +110,16 @@ def register():
     if request.method == "GET":
         return render_template("register.html")
     if request.method == "POST":
-        username = request.form["username"]
-        password1 = request.form["password1"]
-        password2 = request.form["password2"]
+        username = request.form["username"].strip()
+        password1 = request.form["password1"].strip()
+        password2 = request.form["password2"].strip()
         if password1 != password2:
-            return render_template("error.html", message="Salasanat eroavat")
+            return render_template("register.html", error_message="Virhe: salasanat eroavat")
+        if username == "":
+            return render_template("register.html", error_message="Virhe: syötä käyttäjätunnus")
+        if password1 == "":
+            return render_template("register.html", error_message="Virhe: syötä salasana")
         if users.register(username, password1):
             return redirect("/")
         else:
-            return render_template("error.html", message="Rekisteröinti ei onnistunut")
+            return render_template("register.html", error_message="Virhe:: rekisteröinti ei onnistunut")
