@@ -6,7 +6,7 @@
 <hr>
 {% for message in messages %}
 <p>{{ message.content }}</p>
-<p>Lähetetty: {{ message.sent_at }}</p>
+<p>Lähetetty: {{ message.sent_at.strftime("%Y-%m-%d %H:%M:%S") }}</p>
 {% if session.user_id == message.user_id %}
 <a href="/deletemessage/{{ subject_id }}/{{ thread_id }}/{{ message.id }}"> Poista viesti</a>
 {% endif %}
