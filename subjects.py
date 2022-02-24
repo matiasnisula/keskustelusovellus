@@ -12,6 +12,11 @@ def get_title(id):
     result = db.session.execute(sql, {"id":id})
     return result.fetchone()
 
+def get_subject(query:str):
+    sql = "SELECT id, title FROM subjects WHERE title ILIKE :query"
+    result = db.session.execute(sql, {"query":"%"+query+"%"})
+    return result.fetchall()
+
 def save(title:str):
     user_id = users.user_id()
     if user_id == 0:
