@@ -3,7 +3,6 @@ from email import message
 from app import app
 from flask import render_template, request, redirect, url_for
 import messages, users, subjects, threads
-import re
 
 @app.route("/")
 def index():
@@ -11,11 +10,28 @@ def index():
     return render_template("index.html", subjects=list)
 
 
-@app.route("/subject/<int:id>", methods=["GET"])
-def subject(id):
-    list = threads.get_threads_on(id)
-    subject = subjects.get_title(id)[0]
-    return render_template("threads.html", threads=list, id=id, subject=subject)
+@app.route("/result" ,methods=["GET"])
+def result():
+    query = request.args["query"]
+    result_subjects = subjects.get_subject(query)
+    return render_template("index.html", subjects=result_subjects)
+
+
+@app.route("/result/<int:subject_id>" ,methods=["GET"])
+def result_threads(subject_id):
+    query = request.args["query"]
+    result_threads = threads.get_threads(query, subject_id)
+    subject = subjects.get_title(subject_id)
+    return render_template("threads.html", threads=result_threads, 
+                            subject=subject[0], subject_id=subject_id)
+
+
+@app.route("/subject/<int:subject_id>", methods=["GET"])
+def subject(subject_id):
+    #Tämä yhdellä kyselyllä?
+    list = threads.get_threads_on(subject_id)
+    subject = subjects.get_title(subject_id)[0]
+    return render_template("threads.html", threads=list, subject_id=subject_id, subject=subject)
 
 
 @app.route("/subject", methods=["POST"])
