@@ -2,11 +2,20 @@
 {% extends "layout.html" %}
 {% block title %}Aiheet{% endblock %}
 {% block content %}
-<h4>Aiheeseen {{ subject }} liittyvät viestiketjut:</h4>
+<h4>Aiheeseen "{{ subject }}" liittyvät viestiketjut:</h4>
+<br>
+<form action="/result/{{ subject_id }}" method="GET">
+Hae viestiketjuista: <input type="text" name="query">
+<input type="submit" value="Hae">
+</form>
+<br>
+<br>
+<a href="/subject/{{ subject_id }}/newthread">Lisää uusi viestiketju</a> 
 <br>
 <ul>
     {% for thread in threads %}
-    <li><a href="/subject/{{ id }}/{{ thread[0] }}">{{ thread[1] }}</a></li>
+    <br>
+    <li><a href="/subject/{{ subject_id }}/{{ thread[0] }}">{{ thread[1] }}</a></li>
     <br>
     {% if session.user_id == thread.user_id %}
     <li><a href="/delete/{{ thread.subject_id }}/{{ thread[0] }}"> Poista viestiketju</a></li>
@@ -14,9 +23,6 @@
     {% endfor %}
 </ul>
 <p>{{ error_message }}</p>
-<br>
-<a href="/subject/{{ id }}/newthread">Lisää uusi viestiketju</a> 
-<br>
 <br>
 <a href="/">Takaisin aiheisiin</a>
 {% endblock %}
