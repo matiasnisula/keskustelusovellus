@@ -11,6 +11,12 @@ def get_threads_on(subject_id):
     result = db.session.execute(sql, {"id":subject_id})
     return result.fetchall()
 
+def get_threads(query:str, subject_id:int):
+    sql = "SELECT * FROM threads WHERE title ILIKE :query AND subject_id=:id AND visible=True"
+    result = db.session.execute(sql, {"query":"%"+query+"%", "id":subject_id})
+    return result.fetchall()
+
+
 def get_title(thread_id):
     sql = "SELECT title FROM threads WHERE id=:id"
     result = db.session.execute(sql, {"id":thread_id})
