@@ -4,7 +4,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 {% block content %}
-<h3>Aiheet</h3>
+<br>
+<form action="/result" method="GET">
+Hae aiheista: <input type="text" name="query">
+<input type="submit" value="Hae">
+</form>
 <br>
 {% if session.user_id %}
 <br>
@@ -16,6 +20,7 @@ Lisää uusi aihe: <br>
 <br>
 {% endif %}
 <p>{{ error_message }}</p>
+<h3>Aiheet</h3>
 <ul>
 {% for subject in subjects %}
 <li><a href="/subject/{{subject[0]}}"> {{ subject[1] }}</a></li>
