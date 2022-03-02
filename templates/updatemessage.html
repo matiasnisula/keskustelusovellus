@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+{% extends "layout.html" %}
+{% block title %}Aiheet - Muokkaa{% endblock %}
+{% block content %}
+<form action="/update/{{ subject_id }}/{{ thread_id }}/{{ message_id }}" method="post">
+Muokkaa lisäämääsi viestiä: <br>
+<textarea name="content" rows="4" cols="80">{{ message_content }}</textarea>
+<br>
+<input type="submit" value="Lähetä">
+</form>
+<p>{{ error_message }}</p>
+{% endblock %}
