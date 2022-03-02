@@ -18,7 +18,8 @@ Hae viestiketjuista: <input type="text" name="query">
     <li><a href="/subject/{{ subject_id }}/{{ thread[0] }}">{{ thread[1] }}</a></li>
     <br>
     {% if session.user_id == thread.user_id %}
-    <li><a href="/delete/{{ thread.subject_id }}/{{ thread[0] }}"> Poista viestiketju</a></li>
+    <li><a href="/delete/{{ thread.subject_id }}/{{ thread.id }}"> Poista viestiketju</a>  
+     <a href="/update/{{ thread.subject_id }}/{{ thread.id }}"> Muokkaa</a></li>
     {% endif %}
     {% endfor %}
 </ul>
