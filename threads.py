@@ -46,8 +46,8 @@ def update(id, content):
     user_id = users.user_id()
     if user_id == 0:
         return False
-    sql ="UPDATE threads SET title=:title WHERE id=:thread_id"
-    db.session.execute(sql, {"title":content, "thread_id":id})
+    sql ="UPDATE threads SET title=:title WHERE id=:thread_id AND user_id=:user_id AND visible=TRUE"
+    db.session.execute(sql, {"title":content, "thread_id":id, "user_id":user_id})
     db.session.commit()
     return True
     
