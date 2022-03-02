@@ -1,10 +1,6 @@
 from db import db
 import users
 
-def get_all_threads():
-    sql = "SELECT * FROM threads"
-    result = db.session.execute(sql)
-    return result.fetchall()
 
 def get_threads_on(subject_id):
     sql ="SELECT * FROM threads WHERE subject_id=:id AND visible=TRUE"
