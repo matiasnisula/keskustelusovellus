@@ -41,4 +41,13 @@ def delete(id):
     db.session.execute(sql, {"id":id, "user_id":user_id})
     db.session.commit()
     return True
+
+def update(id, content):
+    user_id = users.user_id()
+    if user_id == 0:
+        return False
+    sql ="UPDATE threads SET title=:title WHERE id=:thread_id"
+    db.session.execute(sql, {"title":content, "thread_id":id})
+    db.session.commit()
+    return True
     
