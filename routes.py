@@ -106,21 +106,43 @@ def delete_message(subject_id, thread_id, message_id):
 def update_thread(subject_id, thread_id):
     if request.method == "GET":
         content = threads.get_title(thread_id)[0]
-        return render_template("updateform.html", subject_id=subject_id, 
+        return render_template("updatethread.html", subject_id=subject_id, 
                                 thread_id=thread_id, thread_content=content)
     if request.method == "POST":
         content = request.form["content"].strip()
         if content == "":
-            return render_template("updateform.html", subject_id=subject_id, 
+            return render_template("updatethread.html", subject_id=subject_id, 
                                     thread_id=thread_id,
                                     error_message="Virhe: Lomaketta ei voi lähettää tyhjänä")
         if threads.update(thread_id, content):
             url = f"/subject/{subject_id}"
             return redirect(url)
         else:
-            return render_template("updateform.html", subject_id=subject_id, 
+            return render_template("updatethread.html", subject_id=subject_id, 
                                     thread_id=thread_id,
                                     error_message="Virhe: Viestiketjun muokkaaminen epäonnistui")
+
+
+@app.route("/update/<int:subject_id>/<int:thread_id>/<int:message_id>", methods=["GET", "POST"])
+def update_message(subject_id, thread_id, message_id):
+    if request.method == "GET":
+        content = messages.get_message_content(message_id)[0]
+        return render_template("updatemessage.html", subject_id=subject_id, thread_id=thread_id, 
+                                message_id=message_id, message_content=content)
+    if request.method == "POST":
+        content = request.form["content"].strip()
+        if content == "":
+            return render_template("updatemessage.html", subject_id=subject_id, 
+                                    thread_id=thread_id, message_id=message_id,
+                                    error_message="Virhe: Lomaketta ei voi lähettää tyhjänä")
+        if messages.update(message_id, thread_id, content):
+            url = f"/subject/{subject_id}/{thread_id}"
+            return redirect(url)
+        else:
+            return render_template("updatemessage.html", subject_id=subject_id, 
+                                    thread_id=thread_id, message_id=message_id,
+                                    error_message="Virhe: Viestin muokkaaminen epäonnistui")
+
 
 
 @app.route("/login", methods=["GET", "POST"])
