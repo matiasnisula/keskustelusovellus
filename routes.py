@@ -1,5 +1,3 @@
-from crypt import methods
-from email import message
 from app import app
 from flask import render_template, request, redirect, url_for
 import messages, users, subjects, threads
@@ -7,7 +5,7 @@ import messages, users, subjects, threads
 @app.route("/")
 def index():
     list = subjects.get_all()
-    return render_template("index.html", subjects=list)
+    return render_template("index.html", subjects=list, subject_count=len(list))
 
 
 @app.route("/result" ,methods=["GET"])
