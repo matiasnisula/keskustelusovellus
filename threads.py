@@ -3,12 +3,14 @@ import users
 
 
 def get_threads_on(subject_id):
-    sql ="SELECT * FROM threads WHERE subject_id=:id AND visible=TRUE"
+    sql ="SELECT T.id, T.title, T.subject_id, COUNT(M.thread_id) AS message_count, T.user_id " \
+        "FROM threads AS T LEFT JOIN messages AS M ON T.id=M.thread_id AND M.visible=True WHERE T.visible=TRUE " \
+        "AND T.subject_id=:id GROUP BY T.id ORDER BY T.id"
     result = db.session.execute(sql, {"id":subject_id})
     return result.fetchall()
 
 def get_threads(query:str, subject_id:int):
-    sql = "SELECT * FROM threads WHERE title ILIKE :query AND subject_id=:id AND visible=True"
+    sql = "SELECT * FROM threads WHERE title ILIKE :query AND subject_id=:id AND visible=TRUE"
     result = db.session.execute(sql, {"query":"%"+query+"%", "id":subject_id})
     return result.fetchall()
 
