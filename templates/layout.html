@@ -8,14 +8,15 @@
     <div class="header">
         <h1>Keskustelusovellus</h1>
     </div>
-    <a href="/">Etusivu</a>
-    {% if session.user_id %}
-    <br>
-    <a href="/logout">Kirjaudu ulos</a>
-    {% else %}
-    <br>
-    <a href="/login">Kirjaudu sisään</a>
-    {% endif %}
+    <ul>
+        <li><a href="/">Etusivu</a></li>
+        <li><a href="/register">Luo uusi käyttäjä</a></li>
+        {% if session.user_id %}
+        <li><a href="/logout">Kirjaudu ulos</a></li>
+        {% else %}
+        <li><a href="/login">Kirjaudu sisään</a></li>
+        {% endif %}
+    </ul>
     <hr>
     {% block content %}{% endblock %}
     <hr>
