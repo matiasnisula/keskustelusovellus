@@ -3,9 +3,11 @@ import users
 
 
 def get_all():
-    sql = "SELECT id, title FROM subjects"
+    sql = "SELECT S.id, S.title, COUNT(T.subject_id) AS thread_count FROM subjects AS S LEFT JOIN threads AS T " \
+        "ON S.id=T.subject_id WHERE T.visible=TRUE GROUP BY S.id ORDER BY S.id;"
     result = db.session.execute(sql)
     return result.fetchall()
+
 
 def get_title(id):
     sql = "SELECT title FROM subjects WHERE id=:id"
