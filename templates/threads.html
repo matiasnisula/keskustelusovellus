@@ -2,20 +2,22 @@
 {% extends "layout.html" %}
 {% block title %}Aiheet{% endblock %}
 {% block content %}
-<h4>Aiheeseen "{{ subject }}" liittyvät viestiketjut:</h4>
-<br>
 <form action="/result/{{ subject_id }}" method="GET">
-Hae viestiketjuista: <input type="text" name="query">
-<input type="submit" value="Hae">
+    Hae viestiketjuista: <input type="text" name="query">
+    <input type="submit" value="Hae">
 </form>
 <br>
 <br>
 <a href="/subject/{{ subject_id }}/newthread">Lisää uusi viestiketju</a> 
 <br>
+<h4>Aiheeseen "{{ subject }}" liittyvät viestiketjut:</h4>
+<br>
+<p>{{ text }}</p>
 <ul>
     {% for thread in threads %}
     <br>
-    <li><a href="/subject/{{ subject_id }}/{{ thread[0] }}">{{ thread[1] }}</a></li>
+    <li><a href="/subject/{{ subject_id }}/{{ thread.id }}">{{ thread.title }}</a>
+    <p>Viestien määrä viestiketjussa: {{ thread.message_count }}</p></li>
     <br>
     {% if session.user_id == thread.user_id %}
     <li><a href="/delete/{{ thread.subject_id }}/{{ thread.id }}"> Poista viestiketju</a>  

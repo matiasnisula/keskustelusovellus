@@ -21,7 +21,7 @@ Lisää uusi aihe: <br>
 {% endif %}
 <p>{{ error_message }}</p>
 <h3>Aiheet</h3>
-<p>Aiheiden määrä: {{ subject_count }}</p>
+<p>{{ text }}: {{ subject_count }}</p>
 <ul>
 {% for subject in subjects %}
 <li><a href="/subject/{{subject[0]}}"> {{ subject[1] }}</a>

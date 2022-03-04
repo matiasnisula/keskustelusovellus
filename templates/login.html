@@ -2,6 +2,7 @@
 {% extends "layout.html" %}
 {% block title %}Kirjautuminen{% endblock %}
 {% block content %}
+<h4>Sisäänkirjautuminen</h4>
 <form action="/login" method="post">
     Tunnus: <input type="text" name="username">
     <p>
@@ -11,6 +12,4 @@
 </form>
 <br>
 <p>{{ error_message }}</p>
-<br>
-<a href="/register">Luo uusi tunnus</a>
 {% endblock %}
