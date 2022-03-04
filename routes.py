@@ -1,3 +1,4 @@
+from operator import sub
 from app import app
 from flask import render_template, request, redirect, url_for
 import messages, users, subjects, threads
@@ -5,23 +6,30 @@ import messages, users, subjects, threads
 @app.route("/")
 def index():
     list = subjects.get_all()
-    return render_template("index.html", subjects=list, subject_count=len(list))
+    return render_template("index.html", subjects=list, subject_count=len(list),
+                            text="Aiheiden määrä")
 
 
 @app.route("/result" ,methods=["GET"])
 def result():
-    query = request.args["query"]
-    result_subjects = subjects.get_subject(query)
-    return render_template("index.html", subjects=result_subjects)
+    query = request.args["query"].strip()
+    if query == "":
+        return redirect("/")
+    result_subjects = subjects.get_subjects(query)
+    return render_template("index.html", subjects=result_subjects, subject_count=len(result_subjects),
+                            text="Hakutulokset")
 
 
 @app.route("/result/<int:subject_id>" ,methods=["GET"])
 def result_threads(subject_id):
-    query = request.args["query"]
+    query = request.args["query"].strip()
+    if query == "":
+        url = f"/subject/{subject_id}"
+        return redirect(url)
     result_threads = threads.get_threads(query, subject_id)
     subject = subjects.get_title(subject_id)
     return render_template("threads.html", threads=result_threads, 
-                            subject=subject[0], subject_id=subject_id)
+                            subject=subject[0], subject_id=subject_id, text=f"Hakutuloksia: {len(result_threads)}")
 
 
 @app.route("/subject/<int:subject_id>", methods=["GET"])
