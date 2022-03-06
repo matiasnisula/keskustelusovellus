@@ -8,7 +8,11 @@
 </form>
 <br>
 <br>
+{% if session.user_id %}
 <a href="/subject/{{ subject_id }}/newthread">Lisää uusi viestiketju</a> 
+{% else %}
+<p>Kirjaudu sisään lisätäksesi viestiketju!</p>
+{% endif %}
 <br>
 <h4>Aiheeseen "{{ subject }}" liittyvät viestiketjut:</h4>
 <br>

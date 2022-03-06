@@ -16,6 +16,7 @@ Hae aiheista: <input type="text" name="query">
 Lisää uusi aihe: <br>
 <textarea name="subject" rows="1" cols="20"></textarea>
 <input type="submit" value="Lisää aihe">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <br>
 {% endif %}
@@ -26,12 +27,6 @@ Lisää uusi aihe: <br>
 {% for subject in subjects %}
 <li><a href="/subject/{{subject[0]}}"> {{ subject[1] }}</a>
     <p>Viestiketjujen määrä: {{ subject.thread_count }}</p></li>
-
-{% if session.user_id %}
-<br>
-<!-- <a href="/delete/{{subject[0]}}"> Poista aihe</a> -->
-{% endif %}
-<hr>
 {% endfor %}
 </ul>
 {% endblock %}

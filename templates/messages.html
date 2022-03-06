@@ -6,7 +6,9 @@
 <hr>
 {% for message in messages %}
 <p>{{ message.content }}</p>
+<br>
 <p>Lähetetty: {{ message.sent_at.strftime("%Y-%m-%d %H:%M:%S") }}</p>
+<p>Käyttäjä: {{ message.username }}</p>
 {% if session.user_id == message.user_id %}
 <a href="/deletemessage/{{ subject_id }}/{{ thread_id }}/{{ message.id }}"> Poista viesti</a>
 <a href="/update/{{ subject_id }}/{{ thread_id }}/{{ message.id }}"> Muokkaa</a>
@@ -19,6 +21,7 @@ Lisää uusi viesti: <br>
 <textarea name="content" rows="3" cols="60"></textarea>
 <br>
 <input type="submit" value="Lisää viesti">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 {% endif %}
 <p>{{ error_message }}</p>

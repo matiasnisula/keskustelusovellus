@@ -7,6 +7,7 @@ Muokkaa lisäämääsi viestiä: <br>
 <textarea name="content" rows="4" cols="80">{{ message_content }}</textarea>
 <br>
 <input type="submit" value="Lähetä">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <p>{{ error_message }}</p>
 <a href="/subject/{{ subject_id }}/{{ thread_id }}"> Takaisin</a>

@@ -7,6 +7,7 @@ Muokkaa lisäämääsi viestiketjua: <br>
 <textarea name="content" rows="4" cols="80">{{ thread_content }}</textarea>
 <br>
 <input type="submit" value="Lähetä">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <br>
 <p>{{ error_message }}</p>
