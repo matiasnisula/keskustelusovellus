@@ -3,8 +3,9 @@ import users
 
 
 def get_list(thread_id):
-    sql = "SELECT id, content, sent_at, user_id FROM messages WHERE thread_id=:id " \
-        "AND visible=TRUE"
+    sql = "SELECT M.id AS id, M.content AS content, M.sent_at AS sent_at, " \
+        "U.username AS username, M.user_id AS user_id FROM messages AS M, users AS U " \
+        "WHERE M.thread_id=:id AND M.visible=TRUE AND M.user_id=U.id"
     result = db.session.execute(sql, {"id":thread_id})
     return result.fetchall()
 
