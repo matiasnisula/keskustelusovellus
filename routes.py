@@ -1,6 +1,5 @@
-from operator import sub
 from app import app
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, session
 import messages, users, subjects, threads
 
 @app.route("/")
@@ -43,6 +42,8 @@ def subject(subject_id):
 @app.route("/subject", methods=["POST"])
 def send_subject():
     subject = request.form["subject"].strip()
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     if subject == "":
         return render_template("index.html", error_message="Älä jätä kenttää tyhjäksi!")
 
@@ -60,6 +61,8 @@ def send_message(subject_id,thread_id):
         return render_template("messages.html", messages=message_list, title=title, 
                             subject_id=subject_id, thread_id=thread_id)
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         content = request.form["content"].strip()
         if content == "":
             return render_template("messages.html", messages=message_list, title=title, 
@@ -78,10 +81,12 @@ def send_message(subject_id,thread_id):
 @app.route("/subject/<int:id>/newthread", methods=["GET","POST"])
 def send_thread(id):
     if users.user_id() == 0:
-        return render_template("error.html", message="Kirjaudu sisään lähettääksesi viesti")
+            return render_template("newthread.html", id=id, error_message="Virhe: kirjaudu sisään lähettääksesi viesti!")
     if request.method == "GET":
         return render_template("newthread.html", id=id)
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         thread = request.form["title"].strip()
         if thread == "":
             return render_template("newthread.html", id=id, error_message="Virhe: viestikenttä oli tyhjä!")
@@ -115,6 +120,8 @@ def update_thread(subject_id, thread_id):
         return render_template("updatethread.html", subject_id=subject_id, 
                                 thread_id=thread_id, thread_content=content)
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         content = request.form["content"].strip()
         if content == "":
             return render_template("updatethread.html", subject_id=subject_id, 
@@ -136,6 +143,8 @@ def update_message(subject_id, thread_id, message_id):
         return render_template("updatemessage.html", subject_id=subject_id, thread_id=thread_id, 
                                 message_id=message_id, message_content=content)
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         content = request.form["content"].strip()
         if content == "":
             return render_template("updatemessage.html", subject_id=subject_id, 
