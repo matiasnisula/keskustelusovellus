@@ -11,17 +11,14 @@ Sovelluksen ominaisuuksia:
 
  - Käyttäjä näkee etusivulla listan aihealueista. Jokaisen alueen kohdalla näkyy viestien määrä
 
- - Keskusteluketjuun tulevia kirjoituksia on mahdollista "peukuttaa" ylös- tai alaspäin
-
  - Käyttäjä voi luoda alueelle uuden viestiketjun tai kirjoittaa viestin olemassa olevaan ketjuun. 
-  
-   Viestiketjulla tulee olla otsikko ja jotain sisältöä
 
  - Käyttäjä voi muokata tai poistaa lähettämiään viestejä
 
- - Käyttäjä voi etsiä aiheita ja viestejä, jotka sisältävät annetun sanan
+ - Käyttäjä voi muokata ja poistaa lisäämiään viestiketjuja
 
- - Ylläpitäjä voi lisätä ja poistaa keskustelualueita
+ - Käyttäjä voi etsiä aiheita ja viestiketjuja, jotka sisältävät annetun sanan
+
 
 
 Tällä hetkellä sovelluksessa on toiminnot:
@@ -35,6 +32,10 @@ Tällä hetkellä sovelluksessa on toiminnot:
  - Sisäänkirjautunut käyttäjä voi poistaa lisäämänsä keskusteluketjun
 
  - Sisäänkirjautunut käyttäjä voi poistaa kirjoittamansa viestin mihin tahansa ketjuun
+
+ - Sisäänkirjautunut käyttäjä voi muokata lisäämiään viestejä/viestiketjuja
+
+ - Käyttäjä voi hakea aiheita/viestiketjuja antamalla hakusanan
 
 
 Sovellusta on mahdollista testata [Herokussa](https://serene-brook-58269.herokuapp.com/)
